@@ -13,6 +13,7 @@ var tasksRouter = require("./routes/task");
 var usersRouter = require("./routes/user");
 
 var app = express();
+app.use(cors({ origin: "*" }));
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
