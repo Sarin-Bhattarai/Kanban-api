@@ -25,9 +25,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+mongoose
+  .connect(process.env.DATABASE)
+  .then(() => console.log("database connection successfull"))
+  .catch((err) => console.log(err));
+
 app.use("/", indexRouter);
-// app.use("/users", usersRouter);
-// app.use("/tasks", tasksRouter);
+app.use("/api/auth", usersRouter);
+app.use("/api/tasks", tasksRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
