@@ -55,4 +55,16 @@ module.exports = {
       });
     }
   },
+
+  getUser: async (req, res) => {
+    try {
+      const user = req.user;
+      if (!user) {
+        return res.status(401).json({ message: "Unauthorized" });
+      }
+      res.json({ id: user.id, name: user.name, email: user.email });
+    } catch (error) {
+      res.status(500).json({ message: "Server Error" });
+    }
+  },
 };
